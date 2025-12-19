@@ -39,15 +39,9 @@ jobs:
 
           echo  "key : ${{secrets.CRT_API_TOKEN}}"  
           
-          http_response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
-            -X POST "$CRT_URL" \
+          http_response=$(curl -i -X POST "$CRT_URL" \
             -H "X-Authorization: NI6rhjUHN4hsK2BcnkhvAiutlIFIhwdSA15IIR6QIRMKilcolWhn" \
             -H "Content-Type: application/json") \
-            -d '{}')
-
-            RESPONSE_BODY=$(echo "$http_response" | sed -e 's/HTTP_STATUS:.*//g')
-            HTTP_STATUS=$(echo "$http_response" | tr -d '\n' | sed -e 's/.*HTTP_STATUS://')
-
-            echo "HTTP STATUS: $HTTP_STATUS"
-            echo "RESPONSE BODY:"
-            echo "$RESPONSE_BODY"
+            -d '{}'
+            
+            echo "$http_response"
