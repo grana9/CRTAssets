@@ -29,11 +29,25 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-           response=$(/usr/bin/curl -i -X POST "${{ secrets.CRT_API_URL }}/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds" \
+           response=$(/usr/bin/curl -s -X POST "${{ secrets.CRT_API_URL }}/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds" \
            -H "X-Authorization: ${{ secrets.CRT_API_TOKEN }}" \
            -H "Content-Type: application/json" \
            -d "{}")
 
-            echo "---------------- RESPONSE ----------------"
+            echo "----------------START RESPONSE ----------------"
             echo "$response"
-            echo "------------------------------------------"
+            echo "------------------END RESPONSE-------------------"
+
+            MESSAGE=$(echo "$response" | grep -o '"message":[^,]*')
+
+            echo "CRT Message:"
+            echo "$MESSAGE"
+
+            RUN_ID=$(echo "$MESSAGE" | grep -o '[0-9]\+')
+
+            echo "---CRT Run ID: $RUN_ID"
+
+            if [ -z "$RUN_ID" ]; then
+            echo "----Run ID not found------"
+            exit 1
+            fi
