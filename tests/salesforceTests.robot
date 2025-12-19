@@ -13,7 +13,7 @@ Create SF Record using API
     JwtAuthenticate        ${client_id}                ${username}                 ${privateKey}            sandbox=False
     ${LeadId}=             CreateRecord                Lead                        Salutation=Mr.           FirstName=Test    LastName=Lead    Company=Copado    Status=Working - Contacted
     GoToRecord             ${LeadId}
-    UpdateRecord           Lead                        ${LeadId}                   FirstName=UpdatedName
+    UpdateRecord           Lead                        ${LeadId}                   FirstName= UpdatedName
     RefreshPage
     DeleteRecord           Lead                        ${LeadId}
     RefreshPage
