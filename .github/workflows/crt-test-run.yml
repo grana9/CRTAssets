@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "Triggering CRT test execution..."
           
-          CRT_URL="https://robotic.copado.com/pace/v4/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds"
+          CRT_URL="${{secrets.CRT_API_URL}}/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds"
 
           echo  "Calling URL: $CRT_URL"
 
