@@ -29,7 +29,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-           /usr/bin/curl -i -X POST "${{ secrets.CRT_API_URL }}/projects/98145/jobs/168704/builds" \
+           /usr/bin/curl -i -X POST "${{ secrets.CRT_API_URL }}/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds" \
            -H "X-Authorization: ${{ secrets.CRT_API_TOKEN }}" \
            -H "Content-Type: application/json" \
            -d "{}"
