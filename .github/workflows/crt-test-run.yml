@@ -29,19 +29,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          set -e
-          
-          echo "Triggering CRT test execution..."
-          
-          CRT_URL="https://robotic.copado.com/pace/v4/projects/${{ vars.CRT_PROJECT_ID }}/jobs/${{ vars.CRT_TESTJOB_ID }}/builds"
-
-          echo  "Calling URL: $CRT_URL"
-
-          echo  "key : ${{secrets.CRT_API_TOKEN}}"  
-          
-          http_response=$(curl -i -X POST "$CRT_URL" \
-            -H "X-Authorization: NI6rhjUHN4hsK2BcnkhvAiutlIFIhwdSA15IIR6QIRMKilcolWhn" \
-            -H "Content-Type: application/json") \
-            -d '{}'
-            
-            echo "$http_response"
+           /usr/bin/curl -i -X POST "https://robotic.copado.com/pace/v4/projects/98145/jobs/168704/builds" -H "X-Authorization: NI6rhjUHN4hsK2BcnkhvAiutlIFIhwdSA15IIR6QIRMKilcolWhn" -H "Content-Type: application/json" -d "{}"
